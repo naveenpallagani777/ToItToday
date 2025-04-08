@@ -12,6 +12,7 @@ const Login = () => {
         email: "",
         password: "",
     });
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -27,6 +28,7 @@ const Login = () => {
 
     const submitHandler = async (data) => {
         try {
+            setLoading(true);
             const res = await apiPost('/user/login', data);
             console.log('Login Response:', res);
 
@@ -40,6 +42,8 @@ const Login = () => {
             }
         } catch (err) {
             toast.error(err.message || "Something went wrong!", { position: "top-right" });
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -99,12 +103,19 @@ const Login = () => {
                             <span className='text-sm text-gray-500 hover:text-blue-600 hover:underline cursor-pointer'>
                                 Forgot Password?
                             </span>
-
-                            <Button
-                                type='submit'
-                                label='Submit'
-                                className='w-full h-10 bg-blue-700 text-white rounded-full'
-                            />
+                            {
+                                loading ? (
+                                    <div className="flex justify-center items-center">
+                                        <img src="./image.png" className="animate-spin h-10 w-10" alt="loader" />
+                                    </div>
+                                ) : (
+                                    <Button
+                                        type='submit'
+                                        label='Submit'
+                                        className='w-full h-10 bg-blue-700 text-white rounded-full'
+                                    />
+                                )
+                            }
                         </div>
                         <p className='text-center text-base text-gray-700 mt-2'>
                             If don't have an account, please <Link className="font-bold text-blue-600" to="/sign-up" >Sign Up</Link>.

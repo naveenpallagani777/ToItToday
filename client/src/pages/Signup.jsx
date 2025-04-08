@@ -13,7 +13,7 @@ const SignupForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const submitHandler = async (data) => {
@@ -99,11 +99,20 @@ const SignupForm = () => {
                                 error={errors.password ? errors.password.message : ""}
                             />
 
-                            <Button
-                                type="submit"
-                                label="Sign Up"
-                                className="w-full h-10 bg-blue-700 text-white rounded-full"
-                            />
+                            
+                            {
+                                loading ? (
+                                    <div className="flex justify-center items-center">
+                                        <img src="./image.png" className="animate-spin h-10 w-10" alt="loader" />
+                                    </div>
+                                ) : (
+                                    <Button
+                                        type="submit"
+                                        label="Sign Up"
+                                        className="w-full h-10 bg-blue-700 text-white rounded-full"
+                                    />
+                                )
+                            }
                         </div>
 
                         <p className="text-center text-base text-gray-700">
