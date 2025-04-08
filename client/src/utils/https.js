@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosMakeItTodayInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://to-it-today-server.vercel.app",
   headers: {
     "Content-Type": "application/json",
   },
