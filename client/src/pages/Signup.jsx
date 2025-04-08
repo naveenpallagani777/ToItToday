@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Textbox from "../components/Textbox";
@@ -13,14 +13,14 @@ const SignupForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const submitHandler = async (data) => {
         try {
             const res = await apiPost("/user/signup", data);
             console.log("Signup Response:", res);
-
+            setLoading(true);
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('name', res?.user?.fullName);
@@ -31,7 +31,9 @@ const SignupForm = () => {
             }
         } catch (err) {
             toast.error(err.message || "Something went wrong!", { position: "top-right" });
-        }
+        }finally {
+            setLoading(false);
+        };
     };
 
     return (
@@ -99,11 +101,20 @@ const SignupForm = () => {
                                 error={errors.password ? errors.password.message : ""}
                             />
 
-                            <Button
-                                type="submit"
-                                label="Sign Up"
-                                className="w-full h-10 bg-blue-700 text-white rounded-full"
-                            />
+                            
+                            {
+                                loading ? (
+                                    <div className="flex justify-center border border-blue-600 py-1 rounded-3xl items-center">
+                                        <img src="./image.png" className="animate-spin h-8 w-8" alt="loader" />
+                                    </div>
+                                ) : (
+                                    <Button
+                                        type="submit"
+                                        label="Sign Up"
+                                        className="w-full h-10 bg-blue-700 text-white rounded-full"
+                                    />
+                                )
+                            }
                         </div>
 
                         <p className="text-center text-base text-gray-700">
