@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Textbox from "../components/Textbox";
@@ -20,7 +20,7 @@ const SignupForm = () => {
         try {
             const res = await apiPost("/user/signup", data);
             console.log("Signup Response:", res);
-
+            setLoading(true);
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('name', res?.user?.fullName);
@@ -31,7 +31,9 @@ const SignupForm = () => {
             }
         } catch (err) {
             toast.error(err.message || "Something went wrong!", { position: "top-right" });
-        }
+        }finally {
+            setLoading(false);
+        };
     };
 
     return (
@@ -102,8 +104,8 @@ const SignupForm = () => {
                             
                             {
                                 loading ? (
-                                    <div className="flex justify-center items-center">
-                                        <img src="./image.png" className="animate-spin h-10 w-10" alt="loader" />
+                                    <div className="flex justify-center border border-blue-600 py-1 rounded-3xl items-center">
+                                        <img src="./image.png" className="animate-spin h-8 w-8" alt="loader" />
                                     </div>
                                 ) : (
                                     <Button
