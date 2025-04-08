@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 let options = {
-    origin: ["http://localhost:3000"]
+    origin: ["https://do-it-today.vercel.app"]
 }
 
 mongoose.set("strictQuery", false);
