@@ -22,7 +22,7 @@ const ICONS = {
   low: <MdKeyboardArrowDown />,
 };
 
-const Table = ({ tasks, onUpdate }) => {
+const Table = ({ tasks, onUpdate, setId }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [editTask, setEditTask] = useState(null); // Tracks task being edited
@@ -96,18 +96,19 @@ const Table = ({ tasks, onUpdate }) => {
           <div className="flex items-center gap-3">
             <div className="flex gap-1 items-center text-sm text-gray-600 dark:text-gray-400">
               <FaList />
-              <span>0/{task?.subTasks?.length}</span>
+              <span>
+                {task?.subTasks?.filter(subTask => subTask.isCompleted).length}/{task?.subTasks?.length}
+              </span>
             </div>
           </div>
         </td>
-        <td className="py-2 flex gap-2 md:gap-4 justify-end">
-          <Link target="_blank" to={`/task/${task._id}`}>
-            <Button
-              className="text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base"
-              label="Open"
-              type="button"
-            />
-          </Link>
+        <td className="py-2 flex gap-2 md:gap-4">
+          <Button
+            className="text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base"
+            label="Open"
+            type="button"
+            onClick={() => setId(task._id)}
+          />
           <Button
             className="text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base"
             label="Edit"

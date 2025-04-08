@@ -13,6 +13,7 @@ import Table from "../components/task/Table";
 import AddTask from "../components/task/AddTask";
 import { toast } from "react-toastify";
 import { apiGet, apiPost } from "../utils/https";
+import TaskDetails from "../components/TaskDetails";
 
 const TABS = [
   { title: "Board View", icon: <MdGridView /> },
@@ -31,7 +32,8 @@ const Tasks = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
-  console.log("Tasks  ", tasks);
+  const [id, setId] = useState(null);
+
   const fetchTasks = async () => {
     try {
       const res = await apiGet("/api/task");
@@ -89,17 +91,17 @@ const Tasks = () => {
         )}
 
         {selected !== 1 ? (
-          <BoardView tasks={tasks} onUpdate={fetchTasks} />
+          <BoardView tasks={tasks} setId={setId} onUpdate={fetchTasks} />
         ) : (
           <div className="w-full">
-            <Table tasks={tasks} onUpdate={fetchTasks} />
+            <Table tasks={tasks} onUpdate={fetchTasks} setId={setId} />
           </div>
         )}
       </Tabs>
-
+      <TaskDetails isOpen={id !== null} onClose={() => { setId(null) }} id={id} />
       <AddTask open={open} setOpen={setOpen} onTaskSubmit={handleNewTaskSubmit} />
     </div>
   );
 };
-
+// Example usage
 export default Tasks;
