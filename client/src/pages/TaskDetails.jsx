@@ -29,8 +29,9 @@ const TABS = [{ title: "Task Detail", icon: <FaTasks /> }];
 
 const TaskDetails = () => {
   const { id } = useParams();
-  const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [task, setTask] = useState(null);
+  
 
   useEffect(() => {
     const fetchTask = async () => {

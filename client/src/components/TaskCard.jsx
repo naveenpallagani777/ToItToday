@@ -22,7 +22,7 @@ const ICONS = {
   low: <MdKeyboardArrowDown />,
 };
 
-const TaskCard = ({ task, onUpdate }) => {
+const TaskCard = ({ task, onUpdate, setId }) => {
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
 
@@ -53,7 +53,7 @@ const TaskCard = ({ task, onUpdate }) => {
             <span className='uppercase'>{task?.priority} Priority</span>
           </div>
 
-          {user?.isAdmin && <TaskDialog task={task} onUpdate={onUpdate}/>}
+          <TaskDialog task={task} onUpdate={onUpdate} setId={setId}/>
         </div>
 
         <div className="py-3">
@@ -95,7 +95,9 @@ const TaskCard = ({ task, onUpdate }) => {
 
           <div className='flex gap-1 items-center text-sm text-gray-600 '>
             <FaList />
-            <span>0/{task?.subTasks?.length}</span>
+            <span>
+              {task?.subTasks?.filter(subTask => subTask.isCompleted).length}/{task?.subTasks?.length}
+            </span>
           </div>
         </div>
       </div>

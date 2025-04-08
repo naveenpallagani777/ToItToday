@@ -8,7 +8,6 @@ import { Toaster } from "sonner";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
-import TaskDetails from "./pages/TaskDetails";
 import Tasks from "./pages/Tasks";
 import Trash from "./pages/Trash";
 import Dashboard from "./pages/dashboard";
@@ -112,7 +111,6 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/tasks/:status" element={<Tasks />} />
               <Route path="/trashed" element={<Trash />} />
-              <Route path="/task/:id" element={<TaskDetails />} />
             </>
           ) }
         </Route>
