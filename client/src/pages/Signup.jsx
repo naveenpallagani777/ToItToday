@@ -18,9 +18,9 @@ const SignupForm = () => {
 
     const submitHandler = async (data) => {
         try {
+            setLoading(true);
             const res = await apiPost("/user/signup", data);
             console.log("Signup Response:", res);
-            setLoading(true);
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('name', res?.user?.fullName);
@@ -104,8 +104,8 @@ const SignupForm = () => {
                             
                             {
                                 loading ? (
-                                    <div className="flex justify-center border border-blue-600 py-1 rounded-3xl items-center">
-                                        <img src="./image.png" className="animate-spin h-8 w-8" alt="loader" />
+                                    <div className="flex justify-center border border-blue-600 py-[5px] rounded-3xl items-center">
+                                        <img src="./image.png" className="animate-spin h-7 w-7" alt="loader" />
                                     </div>
                                 ) : (
                                     <Button
