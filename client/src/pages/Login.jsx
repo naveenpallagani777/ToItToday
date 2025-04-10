@@ -105,8 +105,8 @@ const Login = () => {
                             </span>
                             {
                                 loading ? (
-                                    <div className="flex justify-center border border-blue-600 py-1 rounded-3xl items-center">
-                                        <img src="./image.png" className="animate-spin h-10 w-10" alt="loader" />
+                                    <div className="flex justify-center border border-blue-600 py-[5px] rounded-3xl items-center">
+                                        <img src="./image.png" className="animate-spin h-7 w-7" alt="loader" />
                                     </div>
                                 ) : (
                                     <Button

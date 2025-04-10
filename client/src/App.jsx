@@ -71,8 +71,8 @@ const MobileSidebar = () => {
             )}
             onClick={() => closeSidebar()}
           >
-            <div className='bg-white w-3/4 h-full'>
-              <div className='w-full flex justify-end px-5 mt-5'>
+            <div className='bg-white w-3/4 h-full relative'>
+              <div className='absolute top-7 right-4'>
                 <button
                   onClick={() => closeSidebar()}
                   className='flex justify-end items-end'
@@ -81,7 +81,7 @@ const MobileSidebar = () => {
                 </button>
               </div>
 
-              <div className='-mt-10'>
+              <div className=''>
                 <Sidebar />
               </div>
             </div>
